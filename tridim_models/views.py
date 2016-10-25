@@ -13,29 +13,29 @@ from tridim_models.forms import UserForm, RegisteredUserForm
 
 class ModelCreationView(CreateView):
     """Allow 3D Model creation (upload)."""
-    
+
     model = UploadedModel
     fields = ["name", "description"]
-    
+
     def form_valid(self, form):
         user = self.request.user
         form.instance.creator = user.registereduser
         return super(ModelCreationView, self).form_valid(form)
-    
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ModelCreationView, self).dispatch(*args, **kwargs)
 
-    
+
 class UserCreationView(View):
     """Allow a user to register (create an account on the app)."""
-    
+
     def get(self, request, *args, **kwargs):
         uf = UserForm(prefix='user')
         ruf = RegisteredUserForm(prefix='registereduser')
         return render(
             request,
-            'register.html', 
+            'register.html',
             context={"userform":uf, "registereduserform":ruf})
 
     def post(self, request, *args, **kwargs):
@@ -48,12 +48,12 @@ class UserCreationView(View):
             registereduser.save()
             login(request, user)
             messages.add_message(
-                request, 
-                messages.INFO, 
+                request,
+                messages.INFO,
                 "Your account was successfully created ! You can now upload a 3D model.")
             return HttpResponseRedirect("/models/new")
         else:
             return render(
                 request,
-                'register.html', 
-                context={"userform":uf, "registereduserform":ruf})            
+                'register.html',
+                context={"userform":uf, "registereduserform":ruf})

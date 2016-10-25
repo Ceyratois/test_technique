@@ -22,8 +22,8 @@ badge_types_to_create = {
 
 def award_badge(badge_identifier, user, model=None):
     """Create badge object related to user and model."""
-    
-    
+
+
     badge_type = BadgeType.objects.get(identifier=badge_identifier)
     badge = Badge(badge_type=badge_type, proprietary=user, model=model)
     try:
@@ -35,24 +35,24 @@ def award_badge(badge_identifier, user, model=None):
 # Badges for views number
 @receiver(post_save, sender=UploadedModel, dispatch_uid="badge_views_number")
 def award_badges_for_views_number(sender, instance, **kwargs):
-    
+
     if instance.nb_views >= 1000000:
         award_badge("views_1000000", user=instance.creator, model=instance)
     if instance.nb_views >= 1000:
         award_badge("views_1000", user=instance.creator, model=instance)
     if instance.nb_views >= 10:
         award_badge("views_10", user=instance.creator, model=instance)
-      
+
 
 # Badges for created models number
 @receiver(post_save, sender=UploadedModel, dispatch_uid="models_created_number")
 def award_badges_for_models_number(sender, instance, **kwargs):
 
-    if instance.creator.models.count() > 0:    
+    if instance.creator.models.count() > 0:
         award_badge("models_1", user=instance.creator)
-        
-    if instance.creator.models.count() > 4:    
+
+    if instance.creator.models.count() > 4:
         award_badge("models_5", user=instance.creator)
-        
-    if instance.creator.models.count() > 9:    
+
+    if instance.creator.models.count() > 9:
         award_badge("models_10", user=instance.creator)
