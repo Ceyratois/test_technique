@@ -9,6 +9,7 @@ Fonctionnalités implémentées :
   - création de nouveaux objets correspondant aux modèles 3D (vue générique CreateView)
   - badges attribués via des signaux pour découplage le plus effectif possible
   - tests unitaires vérifiant l'attribution des badges
+  - API (django-rest-framework) pour obtenir la liste des utilisateurs, des modèles, des badges.
 
   
 Les templates HTML sont plus que basiques, ils se contentent d'afficher les messages passés à l'utilisateur et les champs de formulaires à remplir.
