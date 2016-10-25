@@ -4,4 +4,11 @@ Cette application Django permet à un internaute de créer un compte puis de sim
 
 Des badges lui sont automatiquement attribués lors de certains évènements.
 
-Des tests techniques vérifient le bon fonctionnement de ce système de badges : ils peuvent être exécutés par la commande Django standard (manage.py test).
+Fonctionnalités implémentées :
+  - authentification avec informations supplémentaires (lien OnetoOne entre les modèles User et RegisteredUser)
+  - création de nouveaux objets correspondant aux modèles 3D (vue générique CreateView)
+  - badges attribués via des signaux pour découplage le plus effectif possible
+  - tests unitaires vérifiant l'attribution des badges
+
+  
+Les templates HTML sont plus que basiques, ils se contentent d'afficher les messages passés à l'utilisateur et les champs de formulaires à remplir.
